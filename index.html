@@ -133,7 +133,29 @@
     <p>Page 3 placeholder</p>
   </div>
   <script>
-    // JS goes here
+    const btnYes = document.getElementById('btn-yes');
+    const btnNo = document.getElementById('btn-no');
+
+    function initYesButton() {
+      const area = document.querySelector('.button-area');
+      const areaRect = area.getBoundingClientRect();
+      btnYes.style.left = (areaRect.width / 2 - btnYes.offsetWidth / 2) + 'px';
+      btnYes.style.top = (areaRect.height / 2 - btnYes.offsetHeight / 2) + 'px';
+    }
+
+    function escapeYes() {
+      const area = document.querySelector('.button-area');
+      const areaRect = area.getBoundingClientRect();
+      const maxX = Math.max(0, areaRect.width - btnYes.offsetWidth);
+      const maxY = Math.max(0, areaRect.height - btnYes.offsetHeight);
+      const newX = Math.random() * maxX;
+      const newY = Math.random() * maxY;
+      btnYes.style.left = newX + 'px';
+      btnYes.style.top = newY + 'px';
+    }
+
+    btnYes.addEventListener('mouseenter', escapeYes);
+    window.addEventListener('load', initYesButton);
   </script>
 </body>
 </html>
