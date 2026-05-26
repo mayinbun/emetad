@@ -48,11 +48,83 @@
     }
 
     #page2, #page3 { display: none; }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(ellipse at 20% 50%, rgba(139,0,0,0.08) 0%, transparent 60%),
+                        radial-gradient(ellipse at 80% 20%, rgba(106,13,173,0.06) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .main-heading {
+      font-size: clamp(2rem, 6vw, 4rem);
+      font-weight: 900;
+      color: var(--text);
+      margin-bottom: 1rem;
+      text-shadow: 0 0 20px var(--accent);
+    }
+
+    .subtext {
+      font-size: clamp(0.9rem, 2vw, 1.2rem);
+      color: var(--text-dim);
+      margin-bottom: 3rem;
+      font-style: italic;
+    }
+
+    .button-area {
+      position: relative;
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      justify-content: center;
+      width: min(600px, 90vw);
+      height: 200px;
+    }
+
+    #btn-yes {
+      position: absolute;
+      padding: 1rem 2.5rem;
+      font-family: var(--font);
+      font-size: 1.2rem;
+      font-weight: 700;
+      background: var(--btn-yes-bg);
+      color: var(--text);
+      border: none;
+      cursor: pointer;
+      transition: left 0.35s cubic-bezier(.25,.8,.25,1), top 0.35s cubic-bezier(.25,.8,.25,1), background 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    #btn-yes:hover { background: var(--btn-yes-hover); }
+
+    #btn-no {
+      position: relative;
+      padding: 1rem 2.5rem;
+      font-family: var(--font);
+      font-size: 1.2rem;
+      font-weight: 400;
+      background: var(--btn-no-bg);
+      color: var(--text-dim);
+      border: 1px solid var(--btn-no-border);
+      cursor: pointer;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
   </style>
 </head>
 <body>
   <div id="page1">
-    <p>Page 1 placeholder</p>
+    <h1 class="main-heading">Will you date me? 💀</h1>
+    <p class="subtext">Even death can't stop this feeling.</p>
+    <div class="button-area">
+      <button id="btn-yes" onclick="handleYesClick()">Yes 💀</button>
+      <button id="btn-no" onclick="handleNoClick()">No</button>
+    </div>
   </div>
   <div id="page2">
     <p>Page 2 placeholder</p>
