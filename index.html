@@ -225,45 +225,53 @@
     }
 
     .button-area {
-      position: relative;
       display: flex;
-      gap: 2rem;
+      gap: 1.5rem;
       align-items: center;
       justify-content: center;
-      width: min(600px, 90vw);
-      height: 200px;
+      flex-wrap: wrap;
     }
 
     #btn-yes {
-      position: absolute;
-      padding: 1rem 2.5rem;
+      padding: 1rem 3rem;
       font-family: var(--font);
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       font-weight: 700;
       background: var(--btn-yes-bg);
       color: var(--text);
-      border: none;
+      border: 1px solid var(--accent);
       cursor: pointer;
-      transition: left 0.35s cubic-bezier(.25,.8,.25,1), top 0.35s cubic-bezier(.25,.8,.25,1), background 0.2s;
       text-transform: uppercase;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
+      box-shadow: 0 0 18px rgba(139,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+      transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
     }
 
-    #btn-yes:hover { background: var(--btn-yes-hover); }
+    #btn-yes:hover {
+      background: var(--btn-yes-hover);
+      box-shadow: 0 0 32px rgba(139,0,0,0.8), 0 0 60px rgba(139,0,0,0.3);
+      transform: translateY(-2px);
+    }
+
+    #btn-yes:active { transform: translateY(0); }
 
     #btn-no {
-      position: relative;
-      padding: 1rem 2.5rem;
+      padding: 1rem 3rem;
       font-family: var(--font);
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       font-weight: 400;
-      background: var(--btn-no-bg);
+      background: transparent;
       color: var(--text-dim);
-      border: 1px solid var(--btn-no-border);
+      border: 1px solid #444;
       cursor: pointer;
-      transition: transform 0.3s ease, opacity 0.3s ease;
       text-transform: uppercase;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
+      transition: transform 0.3s ease, opacity 0.3s ease, border-color 0.2s, color 0.2s;
+    }
+
+    #btn-no:hover {
+      border-color: #666;
+      color: #aaa;
     }
   </style>
 </head>
@@ -319,26 +327,6 @@
     const btnYes = document.getElementById('btn-yes');
     const btnNo = document.getElementById('btn-no');
 
-    function initYesButton() {
-      const area = document.querySelector('.button-area');
-      const areaRect = area.getBoundingClientRect();
-      btnYes.style.left = (areaRect.width / 2 - btnYes.offsetWidth / 2) + 'px';
-      btnYes.style.top = (areaRect.height / 2 - btnYes.offsetHeight / 2) + 'px';
-    }
-
-    function escapeYes() {
-      const area = document.querySelector('.button-area');
-      const areaRect = area.getBoundingClientRect();
-      const maxX = Math.max(0, areaRect.width - btnYes.offsetWidth);
-      const maxY = Math.max(0, areaRect.height - btnYes.offsetHeight);
-      const newX = Math.random() * maxX;
-      const newY = Math.random() * maxY;
-      btnYes.style.left = newX + 'px';
-      btnYes.style.top = newY + 'px';
-    }
-
-    btnYes.addEventListener('mouseenter', escapeYes);
-    window.addEventListener('load', initYesButton);
 
     let noClickCount = 0;
     const NO_MAX_CLICKS = 5;
