@@ -156,6 +156,22 @@
 
     btnYes.addEventListener('mouseenter', escapeYes);
     window.addEventListener('load', initYesButton);
+
+    let noClickCount = 0;
+    const NO_MAX_CLICKS = 5;
+
+    function handleNoClick() {
+      noClickCount++;
+      const scale = Math.max(0, 1 - noClickCount * 0.18);
+      btnNo.style.transform = `scale(${scale})`;
+      btnNo.style.opacity = scale;
+
+      if (noClickCount >= NO_MAX_CLICKS) {
+        btnNo.style.transition = 'transform 0.3s ease, opacity 0.5s ease';
+        btnNo.style.opacity = '0';
+        setTimeout(() => btnNo.remove(), 500);
+      }
+    }
   </script>
 </body>
 </html>
