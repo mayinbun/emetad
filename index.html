@@ -47,7 +47,7 @@
       z-index: 1;
     }
 
-    #page2, #page3 { display: none; }
+    #page2, #page3, #page4 { display: none; }
 
     .date-picker-container {
       display: flex;
@@ -182,6 +182,44 @@
       color: var(--text);
     }
 
+    @keyframes skullPulse {
+      0%, 100% { transform: scale(1) rotate(-5deg); text-shadow: 0 0 20px var(--accent); }
+      50%       { transform: scale(1.15) rotate(5deg); text-shadow: 0 0 60px var(--accent), 0 0 100px var(--accent2); }
+    }
+
+    @keyframes slideUp {
+      0%   { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .confirmed-skull {
+      font-size: 5rem;
+      animation: skullPulse 2s ease-in-out infinite;
+      margin-bottom: 1.5rem;
+    }
+
+    .confirmed-heading {
+      animation: slideUp 0.6s ease forwards;
+    }
+
+    .confirmed-date {
+      font-family: var(--font);
+      font-size: clamp(1.1rem, 3vw, 1.6rem);
+      color: var(--text);
+      text-shadow: 0 0 20px var(--accent2);
+      margin: 1.5rem 0 0.5rem;
+      animation: slideUp 0.6s 0.2s ease both;
+      font-style: italic;
+    }
+
+    .confirmed-sub {
+      font-family: var(--font);
+      font-size: 1rem;
+      color: var(--text-dim);
+      letter-spacing: 2px;
+      animation: slideUp 0.6s 0.4s ease both;
+    }
+
     .food-confirmation {
       font-family: var(--font);
       font-size: 1.1rem;
@@ -311,6 +349,13 @@
     </div>
     <p id="food-confirmation" class="food-confirmation"></p>
   </div>
+  <div id="page4">
+    <div class="confirmed-skull">💀</div>
+    <h1 class="main-heading confirmed-heading">It's official.</h1>
+    <p id="confirmed-date" class="confirmed-date"></p>
+    <p class="confirmed-sub">Don't be late. 💀</p>
+  </div>
+
   <div id="page3">
     <h1 class="main-heading">When? 💀</h1>
     <p class="subtext">Pick your moment of doom.</p>
@@ -392,7 +437,19 @@
         weekday: 'long', month: 'long', day: 'numeric',
         hour: '2-digit', minute: '2-digit'
       });
-      document.getElementById('date-confirmation').textContent = `${formatted}. Don't be late. 💀`;
+      document.getElementById('confirmed-date').textContent = formatted;
+      document.getElementById('page3').style.display = 'none';
+      document.getElementById('page4').style.display = 'flex';
+      launchCelebration();
+    }
+
+    function launchCelebration() {
+      let spawned = 0;
+      const interval = setInterval(() => {
+        for (let i = 0; i < 4; i++) spawnEmoji();
+        spawned++;
+        if (spawned >= 15) clearInterval(interval);
+      }, 300);
     }
 
     function handleNoClick() {
