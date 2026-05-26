@@ -456,47 +456,53 @@
     function playFFVictory() {
       const ctx = new (window.AudioContext || window.webkitAudioContext)();
 
-      function note(freq, start, dur, vol = 0.35) {
+      // Organ pipe sound: fundamental + harmonics via additive synthesis
+      function organNote(freq, start, dur, vol = 0.18) {
         const t = ctx.currentTime + start;
-        // Two slightly detuned oscillators = brass-like richness
-        [0, 4].forEach(detune => {
+        [1, 2, 3, 4].forEach((harmonic, i) => {
           const osc = ctx.createOscillator();
           const env = ctx.createGain();
-          osc.type = 'sawtooth';
-          osc.frequency.value = freq;
-          osc.detune.value = detune;
+          osc.type = 'sine';
+          osc.frequency.value = freq * harmonic;
+          const hVol = vol / (i + 1);
           env.gain.setValueAtTime(0, t);
-          env.gain.linearRampToValueAtTime(vol, t + 0.03);
-          env.gain.setValueAtTime(vol * 0.85, t + dur - 0.06);
+          env.gain.linearRampToValueAtTime(hVol, t + 0.04);
+          env.gain.setValueAtTime(hVol, t + dur - 0.08);
           env.gain.linearRampToValueAtTime(0, t + dur);
           osc.connect(env);
           env.connect(ctx.destination);
           osc.start(t);
-          osc.stop(t + dur + 0.05);
+          osc.stop(t + dur + 0.1);
         });
       }
 
-      // Final Fantasy Victory Fanfare
-      // Staccato opening hits
-      note(523.25, 0.00, 0.13);  // C5
-      note(523.25, 0.18, 0.13);  // C5
-      note(523.25, 0.36, 0.13);  // C5
-      note(523.25, 0.54, 0.18);  // C5
-      note(415.30, 0.78, 0.18);  // Ab4
-      note(466.16, 1.02, 0.18);  // Bb4
-      note(523.25, 1.26, 0.52);  // C5 held
+      // Chord = multiple notes at once
+      function chord(freqs, start, dur, vol) {
+        freqs.forEach(f => organNote(f, start, dur, vol));
+      }
 
-      // Triumphant rising melody
-      note(466.16, 1.95, 0.22);  // Bb4
-      note(523.25, 2.22, 0.22);  // C5
-      note(622.25, 2.49, 0.22);  // Eb5
-      note(783.99, 2.76, 0.22);  // G5
-      note(830.61, 3.03, 0.55);  // Ab5
+      // Bach Toccata and Fugue in D minor — iconic opening
+      // Single high A stab
+      organNote(880.00, 0.00, 0.25);
 
-      // Resolution
-      note(783.99, 3.65, 0.22);  // G5
-      note(622.25, 3.92, 0.22);  // Eb5
-      note(523.25, 4.19, 0.90);  // C5 final
+      // Rapid descending run A5→D5
+      organNote(880.00, 0.35, 0.08);
+      organNote(783.99, 0.43, 0.08);
+      organNote(698.46, 0.51, 0.08);
+      organNote(659.25, 0.59, 0.08);
+      organNote(587.33, 0.67, 0.35);
+
+      // Full D minor chord crash
+      chord([146.83, 220.00, 293.66, 349.23, 440.00, 587.33], 1.1, 0.55, 0.15);
+
+      // Descending bass line D→C→B→Bb
+      organNote(293.66, 1.75, 0.28);
+      organNote(261.63, 2.05, 0.28);
+      organNote(246.94, 2.35, 0.28);
+      organNote(233.08, 2.65, 0.45);
+
+      // Final A minor resolution chord
+      chord([110.00, 164.81, 220.00, 329.63, 440.00], 3.2, 1.4, 0.16);
     }
 
     function handleNoClick() {
