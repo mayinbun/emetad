@@ -49,6 +49,62 @@
 
     #page2, #page3 { display: none; }
 
+    .date-picker-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      width: min(360px, 90vw);
+      margin-bottom: 2rem;
+    }
+
+    .date-label {
+      font-family: var(--font);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--text-dim);
+      align-self: flex-start;
+    }
+
+    .gothic-input {
+      width: 100%;
+      padding: 0.9rem 1.2rem;
+      background: var(--bg-secondary);
+      border: 1px solid #333;
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      color-scheme: dark;
+    }
+
+    .gothic-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 12px var(--accent);
+    }
+
+    .confirm-btn {
+      margin-top: 1rem;
+      padding: 1rem 2.5rem;
+      font-family: var(--font);
+      font-size: 1rem;
+      font-weight: 700;
+      background: var(--btn-yes-bg);
+      color: var(--text);
+      border: none;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+
+    .confirm-btn:hover {
+      background: var(--btn-yes-hover);
+      box-shadow: 0 0 20px var(--accent);
+    }
+
     @keyframes floatUp {
       0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
       100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
@@ -248,7 +304,16 @@
     <p id="food-confirmation" class="food-confirmation"></p>
   </div>
   <div id="page3">
-    <p>Page 3 placeholder</p>
+    <h1 class="main-heading">When? 💀</h1>
+    <p class="subtext">Pick your moment of doom.</p>
+    <div class="date-picker-container">
+      <label class="date-label" for="date-input">Date</label>
+      <input id="date-input" type="date" class="gothic-input">
+      <label class="date-label" for="time-input">Time</label>
+      <input id="time-input" type="time" class="gothic-input">
+      <button class="confirm-btn" onclick="confirmDate()">It's a date 💀</button>
+    </div>
+    <p id="date-confirmation" class="food-confirmation"></p>
   </div>
   <script>
     const btnYes = document.getElementById('btn-yes');
@@ -326,6 +391,20 @@
     function showPage3() {
       document.getElementById('page2').style.display = 'none';
       document.getElementById('page3').style.display = 'flex';
+    }
+
+    function confirmDate() {
+      const date = document.getElementById('date-input').value;
+      const time = document.getElementById('time-input').value;
+      if (!date || !time) {
+        document.getElementById('date-confirmation').textContent = 'Pick both a date and time, mortal. 💀';
+        return;
+      }
+      const formatted = new Date(date + 'T' + time).toLocaleString('en-US', {
+        weekday: 'long', month: 'long', day: 'numeric',
+        hour: '2-digit', minute: '2-digit'
+      });
+      document.getElementById('date-confirmation').textContent = `${formatted}. Don't be late. 💀`;
     }
 
     function handleNoClick() {
