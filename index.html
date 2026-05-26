@@ -450,6 +450,47 @@
         spawned++;
         if (spawned >= 15) clearInterval(interval);
       }, 300);
+      playGothicFanfare();
+    }
+
+    function playGothicFanfare() {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+
+      // Minor key gothic fanfare — D minor arpeggio into a little melody
+      const notes = [
+        // freq, startTime, duration, gain
+        [293.66, 0.0,  0.25, 0.5],  // D4
+        [349.23, 0.2,  0.25, 0.5],  // F4
+        [440.00, 0.4,  0.25, 0.5],  // A4
+        [587.33, 0.6,  0.4,  0.6],  // D5
+        [523.25, 1.1,  0.25, 0.4],  // C5
+        [493.88, 1.35, 0.25, 0.4],  // B4
+        [440.00, 1.6,  0.5,  0.5],  // A4
+        [392.00, 2.2,  0.25, 0.4],  // G4
+        [349.23, 2.45, 0.25, 0.4],  // F4
+        [293.66, 2.7,  0.8,  0.6],  // D4 long
+        // resolve up
+        [440.00, 3.6,  0.2,  0.4],  // A4
+        [493.88, 3.8,  0.2,  0.4],  // B4
+        [587.33, 4.0,  1.2,  0.7],  // D5 final
+      ];
+
+      notes.forEach(([freq, start, dur, gain]) => {
+        const osc = ctx.createOscillator();
+        const env = ctx.createGain();
+        osc.connect(env);
+        env.connect(ctx.destination);
+
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, ctx.currentTime + start);
+
+        env.gain.setValueAtTime(0, ctx.currentTime + start);
+        env.gain.linearRampToValueAtTime(gain * 0.3, ctx.currentTime + start + 0.04);
+        env.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + start + dur);
+
+        osc.start(ctx.currentTime + start);
+        osc.stop(ctx.currentTime + start + dur + 0.05);
+      });
     }
 
     function handleNoClick() {
