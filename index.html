@@ -85,6 +85,56 @@
       padding: 1rem;
     }
 
+    .food-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .food-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 2rem 2.5rem;
+      background: var(--bg-secondary);
+      border: 1px solid #333;
+      cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+      user-select: none;
+    }
+
+    .food-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .food-card.selected {
+      border-color: var(--accent2);
+      box-shadow: 0 0 20px var(--accent2), 0 0 40px var(--accent);
+    }
+
+    .food-emoji { font-size: 3rem; }
+
+    .food-label {
+      font-family: var(--font);
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--text);
+    }
+
+    .food-confirmation {
+      font-family: var(--font);
+      font-size: 1.1rem;
+      color: var(--accent2);
+      text-shadow: 0 0 10px var(--accent2);
+      min-height: 2rem;
+      font-style: italic;
+    }
+
     .float-emoji {
       position: fixed;
       font-size: 2rem;
@@ -175,7 +225,27 @@
   </div>
 
   <div id="page2">
-    <p>Page 2 placeholder</p>
+    <h1 class="main-heading">What we feeling? 💀</h1>
+    <p class="subtext">Choose wisely.</p>
+    <div class="food-grid">
+      <div class="food-card" data-food="Burger" onclick="pickFood(this)">
+        <span class="food-emoji">🍔</span>
+        <span class="food-label">Burger</span>
+      </div>
+      <div class="food-card" data-food="Sushi" onclick="pickFood(this)">
+        <span class="food-emoji">🍣</span>
+        <span class="food-label">Sushi</span>
+      </div>
+      <div class="food-card" data-food="Pizza" onclick="pickFood(this)">
+        <span class="food-emoji">🍕</span>
+        <span class="food-label">Pizza</span>
+      </div>
+      <div class="food-card" data-food="Coffee" onclick="pickFood(this)">
+        <span class="food-emoji">☕</span>
+        <span class="food-label">Coffee</span>
+      </div>
+    </div>
+    <p id="food-confirmation" class="food-confirmation"></p>
   </div>
   <div id="page3">
     <p>Page 3 placeholder</p>
@@ -242,6 +312,20 @@
       document.getElementById('page1').style.display = 'none';
       document.getElementById('celebration-overlay').style.display = 'none';
       document.getElementById('page2').style.display = 'flex';
+    }
+
+    function pickFood(card) {
+      document.querySelectorAll('.food-card').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      const food = card.dataset.food;
+      const el = document.getElementById('food-confirmation');
+      el.textContent = `She wants ${food}. You better deliver. 💀`;
+      setTimeout(showPage3, 1800);
+    }
+
+    function showPage3() {
+      document.getElementById('page2').style.display = 'none';
+      document.getElementById('page3').style.display = 'flex';
     }
 
     function handleNoClick() {
