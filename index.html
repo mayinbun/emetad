@@ -247,6 +247,25 @@
       z-index: 0;
     }
 
+    .portrait-frame {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      box-shadow: 0 0 24px rgba(139,0,0,0.6), 0 0 60px rgba(106,13,173,0.25), inset 0 0 20px rgba(0,0,0,0.4);
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .portrait-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      filter: contrast(1.05) brightness(0.92);
+    }
+
     .main-heading {
       font-size: clamp(2rem, 6vw, 4rem);
       font-weight: 900;
@@ -315,6 +334,9 @@
 </head>
 <body>
   <div id="page1">
+    <div class="portrait-frame">
+      <img src="me.png" alt="" class="portrait-img">
+    </div>
     <h1 class="main-heading">Will you date me? 💀</h1>
     <p class="subtext">Even death can't stop this feeling.</p>
     <div class="button-area">
