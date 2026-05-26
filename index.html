@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Will You Date Me? 💀</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    /* THEME — swap this block for new variants */
+    :root {
+      --bg: #0d0d0d;
+      --bg-secondary: #1a1a1a;
+      --accent: #8b0000;
+      --accent2: #6a0dad;
+      --text: #e8e8e8;
+      --text-dim: #888;
+      --btn-yes-bg: #8b0000;
+      --btn-yes-hover: #a80000;
+      --btn-no-bg: #1a1a1a;
+      --btn-no-border: #555;
+      --font: 'Cinzel', serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    #page1, #page2, #page3 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      width: 100%;
+      padding: 2rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    #page2, #page3 { display: none; }
+  </style>
+</head>
+<body>
+  <div id="page1">
+    <p>Page 1 placeholder</p>
+  </div>
+  <div id="page2">
+    <p>Page 2 placeholder</p>
+  </div>
+  <div id="page3">
+    <p>Page 3 placeholder</p>
+  </div>
+  <script>
+    // JS goes here
+  </script>
+</body>
+</html>
