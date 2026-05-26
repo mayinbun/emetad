@@ -49,6 +49,50 @@
 
     #page2, #page3 { display: none; }
 
+    @keyframes floatUp {
+      0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+    }
+
+    @keyframes fadeInScale {
+      0%   { opacity: 0; transform: scale(0.5); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    #celebration-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    #celebration-overlay.active {
+      display: flex;
+    }
+
+    #celebration-text {
+      font-family: var(--font);
+      font-size: clamp(2rem, 8vw, 5rem);
+      font-weight: 900;
+      color: var(--text);
+      text-shadow: 0 0 40px var(--accent), 0 0 80px var(--accent2);
+      text-align: center;
+      animation: fadeInScale 0.6s ease forwards;
+      padding: 1rem;
+    }
+
+    .float-emoji {
+      position: fixed;
+      font-size: 2rem;
+      pointer-events: none;
+      animation: floatUp linear forwards;
+      z-index: 99;
+    }
+
     body::before {
       content: '';
       position: fixed;
@@ -126,6 +170,10 @@
       <button id="btn-no" onclick="handleNoClick()">No</button>
     </div>
   </div>
+  <div id="celebration-overlay">
+    <div id="celebration-text">SHE SAID YES 💀🖤</div>
+  </div>
+
   <div id="page2">
     <p>Page 2 placeholder</p>
   </div>
@@ -159,6 +207,42 @@
 
     let noClickCount = 0;
     const NO_MAX_CLICKS = 5;
+
+    const CELEBRATION_EMOJIS = ['💀', '🦇', '🥀', '🖤', '🕸️', '☠️'];
+
+    function spawnEmoji() {
+      const el = document.createElement('span');
+      el.className = 'float-emoji';
+      el.textContent = CELEBRATION_EMOJIS[Math.floor(Math.random() * CELEBRATION_EMOJIS.length)];
+      el.style.left = Math.random() * 100 + 'vw';
+      el.style.bottom = '-2rem';
+      const duration = 1.5 + Math.random() * 2;
+      el.style.animationDuration = duration + 's';
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), duration * 1000);
+    }
+
+    function celebrate() {
+      const overlay = document.getElementById('celebration-overlay');
+      overlay.classList.add('active');
+      let spawned = 0;
+      const interval = setInterval(() => {
+        for (let i = 0; i < 5; i++) spawnEmoji();
+        spawned++;
+        if (spawned >= 10) clearInterval(interval);
+      }, 200);
+      setTimeout(showPage2, 2500);
+    }
+
+    function handleYesClick() {
+      celebrate();
+    }
+
+    function showPage2() {
+      document.getElementById('page1').style.display = 'none';
+      document.getElementById('celebration-overlay').style.display = 'none';
+      document.getElementById('page2').style.display = 'flex';
+    }
 
     function handleNoClick() {
       noClickCount++;
