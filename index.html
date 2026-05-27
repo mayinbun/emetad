@@ -219,6 +219,14 @@
       50%       { transform: scale(1.15) rotate(5deg); text-shadow: 0 0 60px var(--accent), 0 0 100px var(--accent2); }
     }
 
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      14%       { transform: scale(1.25); }
+      28%       { transform: scale(1); }
+      42%       { transform: scale(1.15); }
+      56%       { transform: scale(1); }
+    }
+
     @keyframes slideUp {
       0%   { opacity: 0; transform: translateY(30px); }
       100% { opacity: 1; transform: translateY(0); }
@@ -226,7 +234,7 @@
 
     .confirmed-skull {
       font-size: 5rem;
-      animation: skullPulse 2s ease-in-out infinite;
+      animation: heartbeat 1.2s ease-in-out infinite;
       margin-bottom: 1.5rem;
     }
 
@@ -417,7 +425,7 @@
     <p id="food-confirmation" class="food-confirmation"></p>
   </div>
   <div id="page4">
-    <div class="confirmed-skull">💀</div>
+    <div class="confirmed-skull">🖤</div>
     <h1 class="main-heading confirmed-heading">It's official.</h1>
     <p id="confirmed-date" class="confirmed-date"></p>
     <p class="confirmed-sub">Don't be late. 💀</p>
