@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Will You Date Me? 💀</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cinzel+Decorative:wght@400;700;900&display=swap" rel="stylesheet">
   <style>
     /* THEME — swap this block for new variants */
     :root {
@@ -19,6 +19,7 @@
       --btn-no-bg: #1a1a1a;
       --btn-no-border: #555;
       --font: 'Cinzel', serif;
+      --font-heading: 'Cinzel Decorative', serif;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -298,6 +299,7 @@
     }
 
     .main-heading {
+      font-family: var(--font-heading);
       font-size: clamp(2rem, 6vw, 4rem);
       font-weight: 900;
       color: var(--text);
