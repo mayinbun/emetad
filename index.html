@@ -283,7 +283,7 @@
       height: 180px;
       border-radius: 50%;
       border: 2px solid var(--accent);
-      box-shadow: 0 0 24px rgba(139,0,0,0.6), 0 0 60px rgba(106,13,173,0.25), inset 0 0 20px rgba(0,0,0,0.4);
+      box-shadow: 0 0 30px rgba(139,0,0,0.9), 0 0 80px rgba(139,0,0,0.5), 0 0 120px rgba(139,0,0,0.25), inset 0 0 20px rgba(0,0,0,0.4);
       overflow: hidden;
       margin-bottom: 1.5rem;
       flex-shrink: 0;
@@ -294,7 +294,7 @@
       height: 100%;
       object-fit: cover;
       object-position: center center;
-      filter: contrast(1.05) brightness(0.92);
+      filter: contrast(1.1) brightness(0.88) sepia(0.15) hue-rotate(-10deg);
     }
 
     .main-heading {
@@ -304,6 +304,18 @@
       margin-bottom: 1rem;
       text-shadow: 0 0 20px var(--accent);
     }
+
+    @keyframes skullGlowPulse {
+      0%, 100% { transform: scale(1); text-shadow: 0 0 10px rgba(139,0,0,0.4); }
+      50%       { transform: scale(1.2); text-shadow: 0 0 30px rgba(139,0,0,0.9), 0 0 60px rgba(139,0,0,0.4); }
+    }
+
+    #title-skull {
+      display: inline-block;
+      position: relative;
+      animation: skullGlowPulse 3s ease-in-out infinite;
+    }
+
 
     .subtext {
       font-size: clamp(0.9rem, 2vw, 1.2rem);
@@ -368,7 +380,7 @@
     <div class="portrait-frame">
       <img src="me.png" alt="" class="portrait-img">
     </div>
-    <h1 class="main-heading">Will you date me? 💀</h1>
+    <h1 class="main-heading" id="main-title">Will you date me? <span id="title-skull">💀</span></h1>
     <p class="subtext">Even death can't stop this feeling.</p>
     <div class="button-area">
       <button id="btn-yes" onclick="handleYesClick()">Yes 💀</button>
@@ -430,6 +442,22 @@
     const NO_MAX_CLICKS = 5;
 
     const CELEBRATION_EMOJIS = ['💀', '🦇', '🥀', '🖤', '🕸️', '☠️'];
+
+    function spawnBat() {
+      const el = document.createElement('span');
+      el.className = 'float-emoji';
+      el.textContent = '🖤';
+      el.style.left = Math.random() * 100 + 'vw';
+      el.style.bottom = '-2rem';
+      el.style.fontSize = (1.5 + Math.random()) + 'rem';
+      el.style.zIndex = '1';
+      const duration = 3 + Math.random() * 3;
+      el.style.animationDuration = duration + 's';
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), duration * 1000);
+    }
+
+    setInterval(() => spawnBat(), 4000);
 
     function spawnEmoji() {
       const el = document.createElement('span');
