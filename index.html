@@ -469,9 +469,82 @@
       document.querySelectorAll('.food-card').forEach(c => c.classList.remove('selected'));
       card.classList.add('selected');
       const food = card.dataset.food;
+
+      if (food === 'Coffee') {
+        morphCoffeeToMatcha(card);
+        return;
+      }
+
       const el = document.getElementById('food-confirmation');
       el.textContent = `She wants ${food}. You better deliver. 💀`;
+      removeCoffeeConfirmBtns();
       setTimeout(showPage3, 1800);
+    }
+
+    function morphCoffeeToMatcha(card) {
+      const emojiEl = card.querySelector('.food-emoji');
+      const labelEl = card.querySelector('.food-label');
+      const confirmEl = document.getElementById('food-confirmation');
+
+      emojiEl.classList.add('fade-out');
+
+      setTimeout(() => {
+        emojiEl.textContent = '🍵';
+        card.dataset.food = 'Matcha';
+        labelEl.textContent = 'Matcha';
+        emojiEl.classList.remove('fade-out');
+      }, 300);
+
+      confirmEl.textContent = 'Are you sure? 💀';
+      showCoffeeConfirmBtns(card);
+    }
+
+    function showCoffeeConfirmBtns(card) {
+      removeCoffeeConfirmBtns();
+      const confirmEl = document.getElementById('food-confirmation');
+      const btns = document.createElement('div');
+      btns.className = 'food-confirm-btns';
+      btns.id = 'coffee-confirm-btns';
+
+      const yes = document.createElement('button');
+      yes.textContent = 'Yes 💀';
+      yes.onclick = () => {
+        removeCoffeeConfirmBtns();
+        confirmEl.textContent = "She wants Matcha. You better deliver. 💀";
+        setTimeout(showPage3, 1800);
+      };
+
+      const no = document.createElement('button');
+      no.textContent = 'No';
+      no.onclick = () => resetCoffeeToSmoothie(card);
+
+      btns.appendChild(yes);
+      btns.appendChild(no);
+      confirmEl.insertAdjacentElement('afterend', btns);
+    }
+
+    function removeCoffeeConfirmBtns() {
+      const existing = document.getElementById('coffee-confirm-btns');
+      if (existing) existing.remove();
+    }
+
+    function resetCoffeeToSmoothie(card) {
+      const emojiEl = card.querySelector('.food-emoji');
+      const labelEl = card.querySelector('.food-label');
+      const confirmEl = document.getElementById('food-confirmation');
+
+      emojiEl.classList.add('fade-out');
+
+      setTimeout(() => {
+        emojiEl.textContent = '🍍🥭';
+        card.dataset.food = 'Smoothie';
+        labelEl.textContent = 'Smoothie';
+        emojiEl.classList.remove('fade-out');
+      }, 300);
+
+      card.classList.remove('selected');
+      confirmEl.textContent = '';
+      removeCoffeeConfirmBtns();
     }
 
     function showPage3() {
