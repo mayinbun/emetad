@@ -429,6 +429,7 @@
     <h1 class="main-heading confirmed-heading">It's official.</h1>
     <p id="confirmed-date" class="confirmed-date"></p>
     <p class="confirmed-sub">Don't be late. 💀</p>
+    <button id="copy-btn" class="confirm-btn" style="margin-top:1.5rem" onclick="copyResult()">Copy 🖤</button>
   </div>
 
   <div id="page3">
@@ -449,6 +450,7 @@
 
 
     let noClickCount = 0;
+    let pickedFood = '';
     const NO_MAX_CLICKS = 5;
 
     const CELEBRATION_EMOJIS = ['💀', '🦇', '🥀', '🖤', '🕸️', '☠️'];
@@ -513,6 +515,7 @@
         return;
       }
 
+      pickedFood = food;
       const el = document.getElementById('food-confirmation');
       el.textContent = `She wants ${food}. You better deliver. 💀`;
       removeCoffeeConfirmBtns();
@@ -547,6 +550,7 @@
       const yes = document.createElement('button');
       yes.textContent = 'Yes 💀';
       yes.onclick = () => {
+        pickedFood = 'Matcha';
         removeCoffeeConfirmBtns();
         confirmEl.textContent = "She wants Matcha. You better deliver. 💀";
         setTimeout(showPage3, 1800);
@@ -605,6 +609,16 @@
       document.getElementById('page3').style.display = 'none';
       document.getElementById('page4').style.display = 'flex';
       launchCelebration();
+    }
+
+    function copyResult() {
+      const date = document.getElementById('confirmed-date').textContent;
+      const text = `I said yes 🖤 ${pickedFood} on ${date}. Don't be late. 💀`;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('copy-btn');
+        btn.textContent = 'Copied 💀';
+        setTimeout(() => btn.textContent = 'Copy 🖤', 2000);
+      });
     }
 
     function launchCelebration() {
