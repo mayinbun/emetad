@@ -602,3 +602,145 @@ Walk through entire flow one more time. Check: no console errors, buttons look g
 git add index.html .gitignore
 git commit -m "feat: add ambient background glow and gitignore"
 ```
+
+---
+
+### Task 8: Page 3 — Date & Time Picker
+
+**Files:**
+- Modify: `index.html`
+
+- [ ] **Step 1: Add page 3 HTML shell after `#page2`**
+
+```html
+<div id="page3">
+  <h1 class="main-heading">When? 💀</h1>
+  <p class="subtext">Pick your moment of doom.</p>
+  <div class="date-picker-container">
+    <label class="date-label" for="date-input">Date</label>
+    <input id="date-input" type="date" class="gothic-input">
+    <label class="date-label" for="time-input">Time</label>
+    <input id="time-input" type="time" class="gothic-input">
+    <button class="confirm-btn" onclick="confirmDate()">It's a date 💀</button>
+  </div>
+  <p id="date-confirmation" class="food-confirmation"></p>
+</div>
+```
+
+- [ ] **Step 2: Add `#page3` to CSS (reuse same hidden pattern)**
+
+```css
+#page3 { display: none; }
+```
+
+- [ ] **Step 3: Add gothic input + confirm button CSS inside `<style>`**
+
+```css
+.date-picker-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: min(360px, 90vw);
+  margin-bottom: 2rem;
+}
+
+.date-label {
+  font-family: var(--font);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--text-dim);
+  align-self: flex-start;
+}
+
+.gothic-input {
+  width: 100%;
+  padding: 0.9rem 1.2rem;
+  background: var(--bg-secondary);
+  border: 1px solid #333;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  color-scheme: dark;
+}
+
+.gothic-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 12px var(--accent);
+}
+
+.confirm-btn {
+  margin-top: 1rem;
+  padding: 1rem 2.5rem;
+  font-family: var(--font);
+  font-size: 1rem;
+  font-weight: 700;
+  background: var(--btn-yes-bg);
+  color: var(--text);
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.confirm-btn:hover {
+  background: var(--btn-yes-hover);
+  box-shadow: 0 0 20px var(--accent);
+}
+```
+
+- [ ] **Step 4: Update `pickFood` to transition to page 3 after short delay**
+
+Replace existing `pickFood` function:
+
+```javascript
+function pickFood(card) {
+  document.querySelectorAll('.food-card').forEach(c => c.classList.remove('selected'));
+  card.classList.add('selected');
+  const food = card.dataset.food;
+  const el = document.getElementById('food-confirmation');
+  el.textContent = `She wants ${food}. You better deliver. 💀`;
+  setTimeout(showPage3, 1800);
+}
+```
+
+- [ ] **Step 5: Add `showPage3` and `confirmDate` JS functions**
+
+```javascript
+function showPage3() {
+  document.getElementById('page2').style.display = 'none';
+  document.getElementById('page3').style.display = 'flex';
+}
+
+function confirmDate() {
+  const date = document.getElementById('date-input').value;
+  const time = document.getElementById('time-input').value;
+  if (!date || !time) {
+    document.getElementById('date-confirmation').textContent = 'Pick both a date and time, mortal. 💀';
+    return;
+  }
+  const formatted = new Date(date + 'T' + time).toLocaleString('en-US', {
+    weekday: 'long', month: 'long', day: 'numeric',
+    hour: '2-digit', minute: '2-digit'
+  });
+  document.getElementById('date-confirmation').textContent = `${formatted}. Don't be late. 💀`;
+}
+```
+
+- [ ] **Step 6: Verify full flow in browser**
+
+1. Page 1 → catch Yes → celebration → Page 2
+2. Pick food → confirmation → 1.8s pause → Page 3
+3. Try confirm without filling fields → error message
+4. Fill date + time → click confirm → formatted date confirmation appears
+
+- [ ] **Step 7: Commit**
+
+```bash
+git add index.html
+git commit -m "feat: add page 3 gothic date/time picker"
+```
