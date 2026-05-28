@@ -451,6 +451,65 @@
 
     let noClickCount = 0;
     let pickedFood = '';
+
+    const THEMES = {
+      gothic: {
+        vars: {
+          '--bg': '#0d0d0d',
+          '--bg-secondary': '#1a1a1a',
+          '--accent': '#8b0000',
+          '--accent2': '#6a0dad',
+          '--text': '#e8e8e8',
+          '--text-dim': '#888',
+          '--btn-yes-bg': '#8b0000',
+          '--btn-yes-hover': '#a80000',
+          '--btn-no-bg': '#1a1a1a',
+          '--btn-no-border': '#555',
+          '--font-heading': "'Cinzel Decorative', serif",
+        },
+        particle: '🖤',
+        copyPrefix: 'I said yes 🖤',
+        copySuffix: "Don't be late. 💀",
+      },
+      ironman: {
+        vars: {
+          '--bg': '#0a0a1a',
+          '--bg-secondary': '#1a1a3e',
+          '--accent': '#c0392b',
+          '--accent2': '#e8c84a',
+          '--text': '#f0f0f0',
+          '--text-dim': '#e8c84a',
+          '--btn-yes-bg': '#c0392b',
+          '--btn-yes-hover': '#e74c3c',
+          '--btn-no-bg': '#1a1a3e',
+          '--btn-no-border': '#e8c84a',
+          '--font-heading': "'Impact', 'Arial Black', sans-serif",
+        },
+        particle: '⚡',
+        copyPrefix: 'Mission accepted ⚡',
+        copySuffix: "Don't be late. 🔴",
+      },
+    };
+
+    let activeTheme = localStorage.getItem('theme') || 'gothic';
+
+    function setTheme(name) {
+      const theme = THEMES[name];
+      if (!theme) return;
+      activeTheme = name;
+      localStorage.setItem('theme', name);
+
+      const root = document.documentElement;
+      Object.entries(theme.vars).forEach(([k, v]) => root.style.setProperty(k, v));
+
+      document.querySelectorAll(`[data-${name}]`).forEach(el => {
+        el.textContent = el.getAttribute(`data-${name}`);
+      });
+
+      document.querySelectorAll('.theme-btn').forEach(btn => {
+        btn.classList.toggle('theme-btn-active', btn.dataset.theme === name);
+      });
+    }
     const NO_MAX_CLICKS = 5;
 
     const CELEBRATION_EMOJIS = ['💀', '🦇', '🥀', '🖤', '🕸️', '☠️'];
@@ -695,6 +754,9 @@
         setTimeout(() => btnNo.remove(), 500);
       }
     }
+
+    // Apply saved theme on load
+    setTheme(activeTheme);
   </script>
 </body>
 </html>
