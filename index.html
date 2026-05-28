@@ -1319,6 +1319,7 @@
       if (audioUnlocked) return;
       audioUnlocked = true;
       bunAudio.muted = false;
+      if (activeTheme === 'bun') bunAudio.play().catch(() => {});
       document.removeEventListener('click', unlockAudio);
       document.removeEventListener('keydown', unlockAudio);
     }
