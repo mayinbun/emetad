@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Will You Date Me? 💀</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cinzel+Decorative:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cinzel+Decorative:wght@400;700;900&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
   <style>
     /* THEME — swap this block for new variants */
     :root {
@@ -281,7 +281,7 @@
       content: '';
       position: fixed;
       inset: 0;
-      background-image: radial-gradient(ellipse at 20% 50%, rgba(139,0,0,0.08) 0%, transparent 60%),
+      background-image: radial-gradient(ellipse at 20% 50%, color-mix(in srgb, var(--accent) 8%, transparent) 0%, transparent 60%),
                         radial-gradient(ellipse at 80% 20%, rgba(106,13,173,0.06) 0%, transparent 50%);
       pointer-events: none;
       z-index: 0;
@@ -292,7 +292,7 @@
       height: 180px;
       border-radius: 50%;
       border: 2px solid var(--accent);
-      box-shadow: 0 0 30px rgba(139,0,0,0.9), 0 0 80px rgba(139,0,0,0.5), 0 0 120px rgba(139,0,0,0.25), inset 0 0 20px rgba(0,0,0,0.4);
+      box-shadow: 0 0 30px var(--accent), 0 0 80px color-mix(in srgb, var(--accent) 50%, transparent), 0 0 120px color-mix(in srgb, var(--accent) 25%, transparent), inset 0 0 20px rgba(0,0,0,0.4);
       overflow: hidden;
       margin-bottom: 1.5rem;
       flex-shrink: 0;
@@ -316,8 +316,8 @@
     }
 
     @keyframes skullGlowPulse {
-      0%, 100% { transform: scale(1); text-shadow: 0 0 10px rgba(139,0,0,0.4); }
-      50%       { transform: scale(1.2); text-shadow: 0 0 30px rgba(139,0,0,0.9), 0 0 60px rgba(139,0,0,0.4); }
+      0%, 100% { transform: scale(1); text-shadow: 0 0 10px var(--accent); }
+      50%       { transform: scale(1.2); text-shadow: 0 0 30px var(--accent), 0 0 60px color-mix(in srgb, var(--accent) 40%, transparent); }
     }
 
     #title-skull {
@@ -353,13 +353,13 @@
       cursor: pointer;
       text-transform: uppercase;
       letter-spacing: 3px;
-      box-shadow: 0 0 18px rgba(139,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+      box-shadow: 0 0 18px color-mix(in srgb, var(--accent) 50%, transparent), inset 0 1px 0 rgba(255,255,255,0.05);
       transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
     }
 
     #btn-yes:hover {
       background: var(--btn-yes-hover);
-      box-shadow: 0 0 32px rgba(139,0,0,0.8), 0 0 60px rgba(139,0,0,0.3);
+      box-shadow: 0 0 32px var(--accent), 0 0 60px color-mix(in srgb, var(--accent) 30%, transparent);
       transform: translateY(-2px);
     }
 
@@ -465,6 +465,7 @@
     <h1 class="main-heading confirmed-heading" data-gothic="It's official." data-ironman="Mission accepted." data-bun="Hare we go!">It's official.</h1>
     <p id="confirmed-date" class="confirmed-date"></p>
     <p class="confirmed-sub" data-gothic="Don't be late. 💀" data-ironman="Don't be late. 🔴" data-bun="Don't be late. 🐰">Don't be late. 💀</p>
+    <img id="bun-gif" src="https://media1.tenor.com/m/MEv5YTxnyVIAAAAd/ffxiv-dote.gif" alt="" style="display:none;width:min(260px,80vw);border-radius:8px;margin-top:1rem;border:2px solid #8fbc5a;box-shadow:0 0 20px rgba(143,188,90,0.6)">
     <img id="gothic-gif" src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjduOW5hOWlqd2lydWgwNXV5ZDJhaTBtcmhtMTBmcTRpMXdndDU1YSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/barvvy6Ta8kjm/giphy.gif" alt="" style="display:block;width:min(260px,80vw);border-radius:8px;margin-top:1rem;border:2px solid #8b0000;box-shadow:0 0 20px rgba(139,0,0,0.6)">
     <img id="ironman-gif" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNXBianU0bXZhdGJ0cG45bDM4NGk2NTMyNWxnam9jYTBiaXZxM25xYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NDzVwpclOqiprMcfLZ/giphy.gif" alt="Tony Stark" style="display:none;width:min(260px,80vw);border-radius:8px;margin-top:1rem;border:2px solid #c0392b;box-shadow:0 0 20px rgba(192,57,43,0.6)">
     <button id="copy-btn" class="confirm-btn" style="margin-top:1.5rem;width:min(260px,80vw)" onclick="copyResult()" data-gothic="Copy 🖤" data-ironman="Copy 🔴" data-bun="Copy 🐰">Copy 🖤</button>
@@ -504,6 +505,7 @@
           '--btn-no-bg': '#1a1a1a',
           '--btn-no-border': '#555',
           '--font-heading': "'Cinzel Decorative', serif",
+          '--font': "'Cinzel', serif",
         },
         particle: '🖤',
         copyPrefix: 'I said yes 🖤',
@@ -529,6 +531,7 @@
           '--btn-no-bg': '#1a1a3e',
           '--btn-no-border': '#e8c84a',
           '--font-heading': "'Impact', 'Arial Black', sans-serif",
+          '--font': "'Cinzel', serif",
         },
         particle: '⚡',
         copyPrefix: 'Mission accepted ⚡',
@@ -543,17 +546,18 @@
       },
       bun: {
         vars: {
-          '--bg': '#0a0d1a',
-          '--bg-secondary': '#141929',
-          '--accent': '#c8a84b',
-          '--accent2': '#4a90d9',
-          '--text': '#f0ece0',
-          '--text-dim': '#a09070',
-          '--btn-yes-bg': '#c8a84b',
-          '--btn-yes-hover': '#d4b85a',
-          '--btn-no-bg': '#141929',
-          '--btn-no-border': '#4a90d9',
-          '--font-heading': "'Cinzel', serif",
+          '--bg': '#0d1a0f',
+          '--bg-secondary': '#162010',
+          '--accent': '#8fbc5a',
+          '--accent2': '#c8945a',
+          '--text': '#f0ead8',
+          '--text-dim': '#8a9e72',
+          '--btn-yes-bg': '#8fbc5a',
+          '--btn-yes-hover': '#a0cc6a',
+          '--btn-no-bg': '#162010',
+          '--btn-no-border': '#c8945a',
+          '--font-heading': "'Philosopher', serif",
+          '--font': "'Philosopher', serif",
         },
         particle: '🐰',
         copyPrefix: 'I said yes 🐰',
@@ -589,9 +593,10 @@
 
       const ironGif = document.getElementById('ironman-gif');
       const gothGif = document.getElementById('gothic-gif');
+      const bunGif = document.getElementById('bun-gif');
       if (ironGif) ironGif.style.display = name === 'ironman' ? 'block' : 'none';
       if (gothGif) gothGif.style.display = name === 'gothic' ? 'block' : 'none';
-      // bun: no gif, both hidden
+      if (bunGif) bunGif.style.display = name === 'bun' ? 'block' : 'none';
     }
     const NO_MAX_CLICKS = 5;
 
@@ -776,6 +781,8 @@
       }, 300);
       if (activeTheme === 'ironman') {
         playArcReactor();
+      } else if (activeTheme === 'bun') {
+        playBunMelody();
       } else {
         playFFVictory();
       }
@@ -882,6 +889,49 @@
         osc.start(t);
         osc.stop(t + 1.5);
       });
+    }
+
+    function playBunMelody() {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+
+      function bell(freq, start, dur, vol = 0.12) {
+        const t = ctx.currentTime + start;
+        // Sine fundamental + gentle 2nd harmonic for bell tone
+        [1, 2].forEach((h, i) => {
+          const osc = ctx.createOscillator();
+          const env = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.value = freq * h;
+          const hVol = vol / (i + 1.5);
+          env.gain.setValueAtTime(0, t);
+          env.gain.linearRampToValueAtTime(hVol, t + 0.02);
+          env.gain.exponentialRampToValueAtTime(0.001, t + dur);
+          osc.connect(env);
+          env.connect(ctx.destination);
+          osc.start(t);
+          osc.stop(t + dur + 0.1);
+        });
+      }
+
+      // Gentle ascending FF14-style melody in D major — soft harp bell feel
+      // D4 F#4 A4 D5 — then a little flourish
+      const melody = [
+        [293.66, 0.00, 0.6],   // D4
+        [369.99, 0.35, 0.6],   // F#4
+        [440.00, 0.65, 0.6],   // A4
+        [587.33, 1.00, 0.8],   // D5
+        [493.88, 1.55, 0.4],   // B4
+        [440.00, 1.85, 0.4],   // A4
+        [523.25, 2.15, 0.4],   // C5
+        [587.33, 2.45, 1.2],   // D5 — hold
+        // Final soft chord
+        [293.66, 3.00, 1.4, 0.07],
+        [369.99, 3.00, 1.4, 0.07],
+        [440.00, 3.00, 1.4, 0.07],
+        [587.33, 3.00, 1.4, 0.07],
+      ];
+
+      melody.forEach(([freq, start, dur, vol]) => bell(freq, start, dur, vol));
     }
 
     function handleNoClick() {
