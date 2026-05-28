@@ -425,20 +425,20 @@
     <div class="portrait-frame">
       <img src="me.png" alt="" class="portrait-img">
     </div>
-    <h1 class="main-heading" id="main-title">Will you date me? <span id="title-skull" data-gothic="💀" data-ironman="⚡">💀</span></h1>
-    <p class="subtext" data-gothic="Even death can't stop this feeling." data-ironman="I am Iron Man.">Even death can't stop this feeling.</p>
+    <h1 class="main-heading" id="main-title">Will you date me? <span id="title-skull" data-gothic="💀" data-ironman="⚡" data-bun="🐰">💀</span></h1>
+    <p class="subtext" data-gothic="Even death can't stop this feeling." data-ironman="I am Iron Man." data-bun="Hop to it.">Even death can't stop this feeling.</p>
     <div class="button-area">
-      <button id="btn-yes" onclick="handleYesClick()" data-gothic="Yes 💀" data-ironman="Assemble ⚡">Yes 💀</button>
-      <button id="btn-no" onclick="handleNoClick()" data-gothic="No" data-ironman="Retreat">No</button>
+      <button id="btn-yes" onclick="handleYesClick()" data-gothic="Yes 💀" data-ironman="Assemble ⚡" data-bun="Yes please! 🐰">Yes 💀</button>
+      <button id="btn-no" onclick="handleNoClick()" data-gothic="No" data-ironman="Retreat" data-bun="Lettuce not.">No</button>
     </div>
   </div>
   <div id="celebration-overlay">
-    <div id="celebration-text" data-gothic="SHE SAID YES 💀🖤" data-ironman="AVENGERS ASSEMBLE ⚡🔴">SHE SAID YES 💀🖤</div>
+    <div id="celebration-text" data-gothic="SHE SAID YES 💀🖤" data-ironman="AVENGERS ASSEMBLE ⚡🔴" data-bun="SHE SAID YES 🐰🥕">SHE SAID YES 💀🖤</div>
   </div>
 
   <div id="page2">
-    <h1 class="main-heading" data-gothic="What we feeling? 💀" data-ironman="Pick your mission. ⚡">What we feeling? 💀</h1>
-    <p class="subtext" data-gothic="Choose wisely." data-ironman="Choose your target.">Choose wisely.</p>
+    <h1 class="main-heading" data-gothic="What we feeling? 💀" data-ironman="Pick your mission. ⚡" data-bun="What's on the menu? 🐰">What we feeling? 💀</h1>
+    <p class="subtext" data-gothic="Choose wisely." data-ironman="Choose your target." data-bun="Choose your carrot.">Choose wisely.</p>
     <div class="food-grid">
       <div class="food-card" data-food="Burger" onclick="pickFood(this)">
         <span class="food-emoji">🍔</span>
@@ -460,24 +460,24 @@
     <p id="food-confirmation" class="food-confirmation"></p>
   </div>
   <div id="page4">
-    <div class="confirmed-skull" data-gothic="🖤" data-ironman="⚡">🖤</div>
-    <h1 class="main-heading confirmed-heading" data-gothic="It's official." data-ironman="Mission accepted.">It's official.</h1>
+    <div class="confirmed-skull" data-gothic="🖤" data-ironman="⚡" data-bun="🐰">🖤</div>
+    <h1 class="main-heading confirmed-heading" data-gothic="It's official." data-ironman="Mission accepted." data-bun="Hare we go!">It's official.</h1>
     <p id="confirmed-date" class="confirmed-date"></p>
-    <p class="confirmed-sub" data-gothic="Don't be late. 💀" data-ironman="Don't be late. 🔴">Don't be late. 💀</p>
+    <p class="confirmed-sub" data-gothic="Don't be late. 💀" data-ironman="Don't be late. 🔴" data-bun="Don't be late. 🐰">Don't be late. 💀</p>
     <img id="gothic-gif" src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjduOW5hOWlqd2lydWgwNXV5ZDJhaTBtcmhtMTBmcTRpMXdndDU1YSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/barvvy6Ta8kjm/giphy.gif" alt="" style="display:block;width:min(260px,80vw);border-radius:8px;margin-top:1rem;border:2px solid #8b0000;box-shadow:0 0 20px rgba(139,0,0,0.6)">
     <img id="ironman-gif" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNXBianU0bXZhdGJ0cG45bDM4NGk2NTMyNWxnam9jYTBiaXZxM25xYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NDzVwpclOqiprMcfLZ/giphy.gif" alt="Tony Stark" style="display:none;width:min(260px,80vw);border-radius:8px;margin-top:1rem;border:2px solid #c0392b;box-shadow:0 0 20px rgba(192,57,43,0.6)">
-    <button id="copy-btn" class="confirm-btn" style="margin-top:1.5rem;width:min(260px,80vw)" onclick="copyResult()" data-gothic="Copy 🖤" data-ironman="Copy 🔴">Copy 🖤</button>
+    <button id="copy-btn" class="confirm-btn" style="margin-top:1.5rem;width:min(260px,80vw)" onclick="copyResult()" data-gothic="Copy 🖤" data-ironman="Copy 🔴" data-bun="Copy 🐰">Copy 🖤</button>
   </div>
 
   <div id="page3">
-    <h1 class="main-heading" data-gothic="When? 💀" data-ironman="When's the mission? ⚡">When? 💀</h1>
-    <p class="subtext" data-gothic="Pick your moment of doom." data-ironman="Set the coordinates.">Pick your moment of doom.</p>
+    <h1 class="main-heading" data-gothic="When? 💀" data-ironman="When's the mission? ⚡" data-bun="When? 🐰">When? 💀</h1>
+    <p class="subtext" data-gothic="Pick your moment of doom." data-ironman="Set the coordinates." data-bun="Pick your burrow time.">Pick your moment of doom.</p>
     <div class="date-picker-container">
       <label class="date-label" for="date-input">Date</label>
       <input id="date-input" type="date" class="gothic-input">
       <label class="date-label" for="time-input">Time</label>
       <input id="time-input" type="time" class="gothic-input">
-      <button class="confirm-btn" onclick="confirmDate()" data-gothic="It's a date 💀" data-ironman="Lock it in ⚡">It's a date 💀</button>
+      <button class="confirm-btn" onclick="confirmDate()" data-gothic="It's a date 💀" data-ironman="Lock it in ⚡" data-bun="It's a date 🐰">It's a date 💀</button>
     </div>
     <p id="date-confirmation" class="food-confirmation"></p>
   </div>
