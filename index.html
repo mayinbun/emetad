@@ -517,7 +517,7 @@
     function spawnBat() {
       const el = document.createElement('span');
       el.className = 'float-emoji';
-      el.textContent = '🖤';
+      el.textContent = THEMES[activeTheme].particle;
       el.style.left = Math.random() * 100 + 'vw';
       el.style.bottom = '-2rem';
       el.style.fontSize = (1.5 + Math.random()) + 'rem';
@@ -672,7 +672,8 @@
 
     function copyResult() {
       const date = document.getElementById('confirmed-date').textContent;
-      const text = `I said yes 🖤 ${pickedFood} on ${date}. Don't be late. 💀`;
+      const t = THEMES[activeTheme];
+      const text = `${t.copyPrefix} ${pickedFood} on ${date}. ${t.copySuffix}`;
       navigator.clipboard.writeText(text).then(() => {
         const btn = document.getElementById('copy-btn');
         btn.textContent = 'Copied 💀';
