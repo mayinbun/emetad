@@ -1312,6 +1312,18 @@
     const bunAudio = new Audio('bun.mp3');
     bunAudio.loop = true;
     bunAudio.volume = 0.5;
+    bunAudio.muted = true;
+
+    let audioUnlocked = false;
+    function unlockAudio() {
+      if (audioUnlocked) return;
+      audioUnlocked = true;
+      bunAudio.muted = false;
+      document.removeEventListener('click', unlockAudio);
+      document.removeEventListener('keydown', unlockAudio);
+    }
+    document.addEventListener('click', unlockAudio);
+    document.addEventListener('keydown', unlockAudio);
 
     function updateThemeMusic(name) {
       if (name === 'bun') {
