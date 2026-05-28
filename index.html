@@ -994,43 +994,33 @@
 
     let bunHopOffset = 0;
     let bunHopCount = 0;
-    const BUN_HOP_MAX = 5;
-    let bunHopping = false;
 
-    function setupBunNoHover() {
-      if (!btnNo) return;
-      btnNo.addEventListener('mouseenter', handleBunNoHover);
-    }
+    function setupBunNoHover() {}
 
-    function handleBunNoHover() {
-      if (activeTheme !== 'bun' || bunHopping) return;
-      bunHopping = true;
-      bunHopCount++;
+    function handleNoClick() {
+      if (activeTheme === 'bun') {
+        bunHopCount++;
 
-      if (bunHopCount >= BUN_HOP_MAX) {
+        if (bunHopCount >= 3) {
+          btnNo.style.setProperty('--bun-x', bunHopOffset + 'px');
+          btnNo.style.animation = 'none';
+          btnNo.offsetHeight;
+          btnNo.style.animation = `bunFlyOff 0.6s ease forwards`;
+          setTimeout(() => btnNo.remove(), 650);
+          return;
+        }
+
         btnNo.style.setProperty('--bun-x', bunHopOffset + 'px');
         btnNo.style.animation = 'none';
         btnNo.offsetHeight;
-        btnNo.style.animation = `bunFlyOff 0.6s ease forwards`;
-        setTimeout(() => btnNo.remove(), 650);
+        btnNo.style.animation = `bunSingleHop 0.4s ease forwards`;
+        setTimeout(() => {
+          bunHopOffset += 36;
+          btnNo.style.animation = 'none';
+          btnNo.style.transform = `translateX(${bunHopOffset}px)`;
+        }, 420);
         return;
       }
-
-      btnNo.style.setProperty('--bun-x', bunHopOffset + 'px');
-      btnNo.style.animation = 'none';
-      btnNo.offsetHeight;
-      btnNo.style.animation = `bunSingleHop 0.4s ease forwards`;
-
-      setTimeout(() => {
-        bunHopOffset += 36;
-        btnNo.style.animation = 'none';
-        btnNo.style.transform = `translateX(${bunHopOffset}px)`;
-        bunHopping = false;
-      }, 420);
-    }
-
-    function handleNoClick() {
-      if (activeTheme === 'bun') return;
 
       noClickCount++;
       const scale = Math.max(0, 1 - noClickCount * 0.18);
