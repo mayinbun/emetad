@@ -384,6 +384,42 @@
       color: #aaa;
     }
 
+    /* FF14 clipped-corner buttons — bun theme only */
+    .bun-btn-yes {
+      clip-path: polygon(10px 0%, 100% 0%, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0% 100%, 0% 10px) !important;
+      background: linear-gradient(180deg, #4a7a30, #2a5a18) !important;
+      border: 1px solid #8fbc5a !important;
+      border-top: 2px solid #c8d4a0 !important;
+      box-shadow: 0 0 14px rgba(143,188,90,0.5), inset 0 1px 0 rgba(255,255,255,0.1) !important;
+      letter-spacing: 3px !important;
+    }
+    .bun-btn-yes:hover {
+      background: linear-gradient(180deg, #5a9a3a, #3a7020) !important;
+      box-shadow: 0 0 28px rgba(143,188,90,0.7), 0 0 50px rgba(143,188,90,0.3) !important;
+    }
+    .bun-btn-no {
+      clip-path: polygon(10px 0%, 100% 0%, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0% 100%, 0% 10px) !important;
+      background: linear-gradient(180deg, #2a1a05, #1a1005) !important;
+      border: 1px solid #c8945a !important;
+      color: #c8945a !important;
+      letter-spacing: 3px !important;
+    }
+    .bun-btn-no:hover {
+      border-color: #e0a870 !important;
+      color: #e0a870 !important;
+    }
+    .bun-btn-confirm {
+      clip-path: polygon(10px 0%, 100% 0%, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0% 100%, 0% 10px) !important;
+      background: linear-gradient(180deg, #4a7a30, #2a5a18) !important;
+      border: 1px solid #8fbc5a !important;
+      border-top: 2px solid #c8d4a0 !important;
+      box-shadow: 0 0 14px rgba(143,188,90,0.4) !important;
+    }
+    .bun-btn-confirm:hover {
+      background: linear-gradient(180deg, #5a9a3a, #3a7020) !important;
+      box-shadow: 0 0 28px rgba(143,188,90,0.6) !important;
+    }
+
     .theme-switcher {
       position: fixed;
       top: 1rem;
@@ -597,6 +633,14 @@
       if (ironGif) ironGif.style.display = name === 'ironman' ? 'block' : 'none';
       if (gothGif) gothGif.style.display = name === 'gothic' ? 'block' : 'none';
       if (bunGif) bunGif.style.display = name === 'bun' ? 'block' : 'none';
+
+      const btnYes = document.getElementById('btn-yes');
+      const btnNo = document.getElementById('btn-no');
+      const confirmBtns = document.querySelectorAll('.confirm-btn');
+      const isBun = name === 'bun';
+      if (btnYes) { btnYes.classList.toggle('bun-btn-yes', isBun); }
+      if (btnNo) { btnNo.classList.toggle('bun-btn-no', isBun); }
+      confirmBtns.forEach(b => b.classList.toggle('bun-btn-confirm', isBun));
     }
     const NO_MAX_CLICKS = 5;
 
