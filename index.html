@@ -1322,9 +1322,11 @@
       if (activeTheme === 'bun') bunAudio.play().catch(() => {});
       document.removeEventListener('click', unlockAudio);
       document.removeEventListener('keydown', unlockAudio);
+      document.removeEventListener('mousemove', unlockAudio);
     }
     document.addEventListener('click', unlockAudio);
     document.addEventListener('keydown', unlockAudio);
+    document.addEventListener('mousemove', unlockAudio);
 
     function updateThemeMusic(name) {
       if (name === 'bun') {
