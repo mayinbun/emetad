@@ -514,6 +514,7 @@
         coffeeNoFood: 'Smoothie',
         coffeeNoLabel: 'Smoothie',
         coffeeConfirmText: 'Are you sure? 💀',
+        celebrationEmojis: ['💀', '🦇', '🥀', '🖤', '🕸️', '☠️'],
       },
       ironman: {
         vars: {
@@ -538,6 +539,7 @@
         coffeeNoFood: 'Smoothie',
         coffeeNoLabel: 'Smoothie',
         coffeeConfirmText: 'Are you sure? ⚡',
+        celebrationEmojis: ['⚡', '🔴', '🛡️', '⭐', '💥', '🔩'],
       },
       bun: {
         vars: {
@@ -562,6 +564,7 @@
         coffeeNoFood: 'Lettuce',
         coffeeNoLabel: 'Lettuce',
         coffeeConfirmText: 'Are you sure? 🐰',
+        celebrationEmojis: ['🐰', '🥕', '🌾', '🥬', '🌸', '✨'],
       },
     };
 
@@ -613,7 +616,8 @@
     function spawnEmoji() {
       const el = document.createElement('span');
       el.className = 'float-emoji';
-      el.textContent = CELEBRATION_EMOJIS[Math.floor(Math.random() * CELEBRATION_EMOJIS.length)];
+      const emojis = THEMES[activeTheme].celebrationEmojis;
+      el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
       el.style.left = Math.random() * 100 + 'vw';
       el.style.bottom = '-2rem';
       const duration = 1.5 + Math.random() * 2;
@@ -665,17 +669,18 @@
       const emojiEl = card.querySelector('.food-emoji');
       const labelEl = card.querySelector('.food-label');
       const confirmEl = document.getElementById('food-confirmation');
+      const target = THEMES[activeTheme].coffeeTarget;
 
       emojiEl.classList.add('fade-out');
 
       setTimeout(() => {
-        emojiEl.textContent = '🍵';
-        card.dataset.food = 'Matcha';
-        labelEl.textContent = 'Matcha';
+        emojiEl.textContent = target.emoji;
+        card.dataset.food = target.food;
+        labelEl.textContent = target.label;
         emojiEl.classList.remove('fade-out');
       }, 300);
 
-      confirmEl.textContent = 'Are you sure? 💀';
+      confirmEl.textContent = THEMES[activeTheme].coffeeConfirmText;
       showCoffeeConfirmBtns(card);
     }
 
@@ -687,11 +692,11 @@
       btns.id = 'coffee-confirm-btns';
 
       const yes = document.createElement('button');
-      yes.textContent = 'Yes 💀';
+      yes.textContent = 'Yes';
       yes.onclick = () => {
-        pickedFood = 'Matcha';
+        pickedFood = THEMES[activeTheme].coffeeTarget.food;
         removeCoffeeConfirmBtns();
-        confirmEl.textContent = "She wants Matcha. You better deliver. 💀";
+        confirmEl.textContent = THEMES[activeTheme].coffeeYesText;
         setTimeout(showPage3, 1800);
       };
 
@@ -713,13 +718,14 @@
       const emojiEl = card.querySelector('.food-emoji');
       const labelEl = card.querySelector('.food-label');
       const confirmEl = document.getElementById('food-confirmation');
+      const theme = THEMES[activeTheme];
 
       emojiEl.classList.add('fade-out');
 
       setTimeout(() => {
-        emojiEl.textContent = '🍍🥭';
-        card.dataset.food = 'Smoothie';
-        labelEl.textContent = 'Smoothie';
+        emojiEl.textContent = theme.coffeeNoEmoji;
+        card.dataset.food = theme.coffeeNoFood;
+        labelEl.textContent = theme.coffeeNoLabel;
         emojiEl.classList.remove('fade-out');
       }, 300);
 
