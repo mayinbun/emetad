@@ -618,9 +618,9 @@
   <div id="vanta-bg" style="position:fixed;inset:0;z-index:0;pointer-events:none;"></div>
   <div id="vanta-birds" style="position:fixed;inset:0;z-index:0;pointer-events:none;display:none;"></div>
   <div class="theme-switcher">
-    <button class="theme-btn theme-btn-active" data-theme="gothic" onclick="setTheme('gothic')">💀</button>
-    <button class="theme-btn" data-theme="ironman" onclick="setTheme('ironman')">⚡</button>
     <button class="theme-btn" data-theme="bun" onclick="setTheme('bun')">🐰</button>
+    <button class="theme-btn" data-theme="gothic" onclick="setTheme('gothic')">💀</button>
+    <button class="theme-btn" data-theme="ironman" onclick="setTheme('ironman')">⚡</button>
   </div>
   <div id="page1">
     <div class="portrait-frame">
@@ -859,6 +859,10 @@
       confirmBtns.forEach(b => b.classList.toggle('bun-btn-confirm', isBun));
 
       document.body.classList.toggle('bun-theme', name === 'bun');
+
+      const url = new URL(window.location);
+      url.searchParams.set('theme', name);
+      window.history.replaceState({}, '', url);
 
       initVanta(name);
     }
