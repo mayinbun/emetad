@@ -865,6 +865,7 @@
       window.history.replaceState({}, '', url);
 
       initVanta(name);
+      updateThemeMusic(name);
     }
     const NO_MAX_CLICKS = 5;
 
@@ -1305,6 +1306,19 @@
         btnNo.style.transition = 'transform 0.3s ease, opacity 0.5s ease';
         btnNo.style.opacity = '0';
         setTimeout(() => btnNo.remove(), 500);
+      }
+    }
+
+    const bunAudio = new Audio('bun.mp3');
+    bunAudio.loop = true;
+    bunAudio.volume = 0.5;
+
+    function updateThemeMusic(name) {
+      if (name === 'bun') {
+        bunAudio.play().catch(() => {});
+      } else {
+        bunAudio.pause();
+        bunAudio.currentTime = 0;
       }
     }
 
