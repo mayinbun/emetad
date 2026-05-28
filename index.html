@@ -50,6 +50,76 @@
 
     #page2, #page3, #page4 { display: none; }
 
+    body.bun-theme {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    body.bun-theme #page1,
+    body.bun-theme #page2,
+    body.bun-theme #page3,
+    body.bun-theme #page4 {
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 20px;
+      max-width: 560px;
+      width: 90vw;
+      min-height: unset;
+      padding: 3rem 2rem;
+      box-shadow: 0 8px 32px rgba(74,144,217,0.2);
+    }
+
+    body.bun-theme .food-card {
+      background: rgba(255,255,255,0.75);
+      border-color: #a8c8e8;
+    }
+
+    body.bun-theme .food-label {
+      color: #0d1e2e;
+    }
+
+    body.bun-theme .food-confirm-btns button {
+      background: rgba(255,255,255,0.75);
+      border-color: #4a90d9;
+      color: #0d1e2e;
+    }
+
+    body.bun-theme .food-confirm-btns button:hover {
+      background: #4a90d9;
+      color: #ffffff;
+      box-shadow: 0 0 10px rgba(74,144,217,0.6);
+    }
+
+    body.bun-theme .gothic-input {
+      background: rgba(255,255,255,0.75);
+      border-color: #a8c8e8;
+      color: #0d1e2e;
+      color-scheme: light;
+    }
+
+    body.bun-theme .gothic-input:focus {
+      border-color: #4a90d9;
+      box-shadow: 0 0 12px rgba(74,144,217,0.4);
+    }
+
+    body.bun-theme .date-label {
+      color: #2a4a6a;
+    }
+
+    body.bun-theme #celebration-overlay {
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+
+    body.bun-theme #celebration-text {
+      color: #0d1e2e;
+      text-shadow: 0 2px 8px rgba(255,255,255,0.8), 0 0 30px rgba(74,144,217,0.5);
+    }
+
     .date-picker-container {
       display: flex;
       flex-direction: column;
@@ -479,37 +549,37 @@
     /* FF14 clipped-corner buttons — bun theme only */
     .bun-btn-yes {
       clip-path: polygon(10px 0%, 100% 0%, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0% 100%, 0% 10px) !important;
-      background: linear-gradient(180deg, #4a7a30, #2a5a18) !important;
-      border: 1px solid #8fbc5a !important;
-      border-top: 2px solid #c8d4a0 !important;
-      box-shadow: 0 0 14px rgba(143,188,90,0.5), inset 0 1px 0 rgba(255,255,255,0.1) !important;
+      background: linear-gradient(180deg, #5aa0e9, #3a78c8) !important;
+      border: 1px solid #a8d4f8 !important;
+      border-top: 2px solid #daeeff !important;
+      box-shadow: 0 0 14px rgba(74,144,217,0.5), inset 0 1px 0 rgba(255,255,255,0.2) !important;
       letter-spacing: 3px !important;
     }
     .bun-btn-yes:hover {
-      background: linear-gradient(180deg, #5a9a3a, #3a7020) !important;
-      box-shadow: 0 0 28px rgba(143,188,90,0.7), 0 0 50px rgba(143,188,90,0.3) !important;
+      background: linear-gradient(180deg, #6ab0f9, #4a88d8) !important;
+      box-shadow: 0 0 28px rgba(74,144,217,0.7), 0 0 50px rgba(74,144,217,0.3) !important;
     }
     .bun-btn-no {
       clip-path: polygon(10px 0%, 100% 0%, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0% 100%, 0% 10px) !important;
-      background: linear-gradient(180deg, #2a1a05, #1a1005) !important;
-      border: 1px solid #c8945a !important;
-      color: #c8945a !important;
+      background: linear-gradient(180deg, #1e3248, #162840) !important;
+      border: 1px solid #a8c8e8 !important;
+      color: #a8c8e8 !important;
       letter-spacing: 3px !important;
     }
     .bun-btn-no:hover {
-      border-color: #e0a870 !important;
-      color: #e0a870 !important;
+      border-color: #daeeff !important;
+      color: #daeeff !important;
     }
     .bun-btn-confirm {
       clip-path: polygon(10px 0%, 100% 0%, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0% 100%, 0% 10px) !important;
-      background: linear-gradient(180deg, #4a7a30, #2a5a18) !important;
-      border: 1px solid #8fbc5a !important;
-      border-top: 2px solid #c8d4a0 !important;
-      box-shadow: 0 0 14px rgba(143,188,90,0.4) !important;
+      background: linear-gradient(180deg, #5aa0e9, #3a78c8) !important;
+      border: 1px solid #a8d4f8 !important;
+      border-top: 2px solid #daeeff !important;
+      box-shadow: 0 0 14px rgba(74,144,217,0.4) !important;
     }
     .bun-btn-confirm:hover {
-      background: linear-gradient(180deg, #5a9a3a, #3a7020) !important;
-      box-shadow: 0 0 28px rgba(143,188,90,0.6) !important;
+      background: linear-gradient(180deg, #6ab0f9, #4a88d8) !important;
+      box-shadow: 0 0 28px rgba(74,144,217,0.6) !important;
     }
 
     .theme-switcher {
@@ -618,6 +688,7 @@
   <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.cells.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.clouds.min.js"></script>
   <script>
     const btnYes = document.getElementById('btn-yes');
     const btnNo = document.getElementById('btn-no');
@@ -683,16 +754,16 @@
       },
       bun: {
         vars: {
-          '--bg': '#0d1a0f',
-          '--bg-secondary': '#162010',
-          '--accent': '#8fbc5a',
-          '--accent2': '#c8945a',
-          '--text': '#f0ead8',
-          '--text-dim': '#8a9e72',
-          '--btn-yes-bg': '#8fbc5a',
-          '--btn-yes-hover': '#a0cc6a',
-          '--btn-no-bg': '#162010',
-          '--btn-no-border': '#c8945a',
+          '--bg': '#1a2a3a',
+          '--bg-secondary': '#1e3248',
+          '--accent': '#4a90d9',
+          '--accent2': '#1a3a6a',
+          '--text': '#0d1e2e',
+          '--text-dim': '#2a4a6a',
+          '--btn-yes-bg': '#4a90d9',
+          '--btn-yes-hover': '#5aa0e9',
+          '--btn-no-bg': '#1e3248',
+          '--btn-no-border': '#4a90d9',
           '--font-heading': "'Philosopher', serif",
           '--font': "'Philosopher', serif",
         },
@@ -706,7 +777,7 @@
         coffeeNoLabel: 'Lettuce',
         coffeeConfirmText: 'Are you sure? 🐰',
         celebrationEmojis: ['🐰', '🥕', '🌾', '🥬', '🌸', '✨'],
-        vanta: { effect: 'CELLS', color1: 0x2a5a18, color2: 0x8fbc5a, size: 2.5, speed: 0.8 },
+        vanta: { effect: 'CLOUDS', backgroundColor: 0xffffff, skyColor: 0x4caee3, cloudColor: 0x96a9d7, cloudShadowColor: 0x969696, sunColor: 0xff8f00, sunGlareColor: 0xff3d00, sunlightColor: 0xff9933, speed: 1 },
       },
     };
 
@@ -787,6 +858,8 @@
       if (btnNo) { btnNo.classList.toggle('bun-btn-no', isBun); }
       confirmBtns.forEach(b => b.classList.toggle('bun-btn-confirm', isBun));
 
+      document.body.classList.toggle('bun-theme', name === 'bun');
+
       initVanta(name);
     }
     const NO_MAX_CLICKS = 5;
@@ -841,7 +914,7 @@
 
       pickedFood = food;
       const el = document.getElementById('food-confirmation');
-      el.textContent = `She wants ${food}. You better deliver. 💀`;
+      el.textContent = `She wants ${food}. You better deliver. ${THEMES[activeTheme].particle}`;
       removeCoffeeConfirmBtns();
       setTimeout(showPage3, 1800);
     }
