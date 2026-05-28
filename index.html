@@ -545,6 +545,8 @@
   </style>
 </head>
 <body>
+  <div id="vanta-bg" style="position:fixed;inset:0;z-index:0;pointer-events:none;"></div>
+  <div id="vanta-birds" style="position:fixed;inset:0;z-index:0;pointer-events:none;display:none;"></div>
   <div class="theme-switcher">
     <button class="theme-btn theme-btn-active" data-theme="gothic" onclick="setTheme('gothic')">💀</button>
     <button class="theme-btn" data-theme="ironman" onclick="setTheme('ironman')">⚡</button>
@@ -611,6 +613,11 @@
     </div>
     <p id="date-confirmation" class="food-confirmation"></p>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.cells.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js"></script>
   <script>
     const btnYes = document.getElementById('btn-yes');
     const btnNo = document.getElementById('btn-no');
@@ -645,6 +652,7 @@
         coffeeNoLabel: 'Smoothie',
         coffeeConfirmText: 'Are you sure? 💀',
         celebrationEmojis: ['💀', '🦇', '🥀', '🖤', '🕸️', '☠️'],
+        vanta: { effect: 'FOG', highlightColor: 0x3a0000, midtoneColor: 0x1a0000, lowlightColor: 0x0d0d0d, baseColor: 0x0d0d0d, blurFactor: 0.6, speed: 1.2, zoom: 0.8 },
       },
       ironman: {
         vars: {
@@ -671,6 +679,7 @@
         coffeeNoLabel: 'Smoothie',
         coffeeConfirmText: 'Are you sure? ⚡',
         celebrationEmojis: ['⚡', '🔴', '🛡️', '⭐', '💥', '🔩'],
+        vanta: { effect: 'NET', color: 0xc0392b, backgroundColor: 0x0a0a1a, points: 10, maxDistance: 22, spacing: 18, showDots: true },
       },
       bun: {
         vars: {
@@ -697,10 +706,49 @@
         coffeeNoLabel: 'Lettuce',
         coffeeConfirmText: 'Are you sure? 🐰',
         celebrationEmojis: ['🐰', '🥕', '🌾', '🥬', '🌸', '✨'],
+        vanta: { effect: 'CELLS', color1: 0x2a5a18, color2: 0x8fbc5a, size: 2.5, speed: 0.8 },
       },
     };
 
     let activeTheme = localStorage.getItem('theme') || 'gothic';
+    let vantaEffect = null;
+    let vantaBirds = null;
+
+    function initVanta(name) {
+      if (vantaEffect) { vantaEffect.destroy(); vantaEffect = null; }
+      if (vantaBirds) { vantaBirds.destroy(); vantaBirds = null; }
+
+      const birdsEl = document.getElementById('vanta-birds');
+
+      if (name === 'gothic' && window.VANTA && window.VANTA.BIRDS) {
+        birdsEl.style.display = 'block';
+        vantaBirds = window.VANTA.BIRDS({
+          el: '#vanta-birds',
+          THREE: window.THREE,
+          backgroundColor: 0x000000,
+          color1: 0x1a0000,
+          color2: 0x0d0d0d,
+          colorMode: 'variance',
+          birdSize: 1.2,
+          wingSpan: 28,
+          speedLimit: 3,
+          separation: 80,
+          alignment: 50,
+          cohesion: 50,
+          quantity: 3,
+          backgroundAlpha: 0,
+        });
+      } else {
+        birdsEl.style.display = 'none';
+      }
+
+      const cfg = THEMES[name] && THEMES[name].vanta;
+      if (!cfg || !window.VANTA) return;
+      const { effect, ...opts } = cfg;
+      const fn = window.VANTA[effect];
+      if (!fn) return;
+      vantaEffect = fn({ el: '#vanta-bg', THREE: window.THREE, ...opts });
+    }
 
     function setTheme(name) {
       const theme = THEMES[name];
@@ -738,26 +786,13 @@
       if (btnYes) { btnYes.classList.toggle('bun-btn-yes', isBun); }
       if (btnNo) { btnNo.classList.toggle('bun-btn-no', isBun); }
       confirmBtns.forEach(b => b.classList.toggle('bun-btn-confirm', isBun));
+
+      initVanta(name);
     }
     const NO_MAX_CLICKS = 5;
 
     const CELEBRATION_EMOJIS = ['💀', '🦇', '🥀', '🖤', '🕸️', '☠️'];
 
-    function spawnBat() {
-      const el = document.createElement('span');
-      el.className = 'float-emoji';
-      el.textContent = THEMES[activeTheme].particle;
-      el.style.left = Math.random() * 100 + 'vw';
-      el.style.bottom = '-2rem';
-      el.style.fontSize = (1.5 + Math.random()) + 'rem';
-      el.style.zIndex = '1';
-      const duration = 3 + Math.random() * 3;
-      el.style.animationDuration = duration + 's';
-      document.body.appendChild(el);
-      setTimeout(() => el.remove(), duration * 1000);
-    }
-
-    setInterval(() => spawnBat(), 4000);
 
     function spawnEmoji() {
       const el = document.createElement('span');
