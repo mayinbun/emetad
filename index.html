@@ -1309,17 +1309,18 @@
       }
     }
 
-    const bunAudio = new Audio('bun.mp3');
-    bunAudio.loop = true;
-    bunAudio.volume = 0.5;
-    bunAudio.muted = true;
+    const themeAudio = {
+      bun: new Audio('bun.mp3'),
+      gothic: new Audio('goth.mp3'),
+    };
+    Object.values(themeAudio).forEach(a => { a.loop = true; a.volume = 0.5; a.muted = true; });
 
     let audioUnlocked = false;
     function unlockAudio() {
       if (audioUnlocked) return;
       audioUnlocked = true;
-      bunAudio.muted = false;
-      if (activeTheme === 'bun') bunAudio.play().catch(() => {});
+      Object.values(themeAudio).forEach(a => { a.muted = false; });
+      if (themeAudio[activeTheme]) themeAudio[activeTheme].play().catch(() => {});
       document.removeEventListener('click', unlockAudio);
       document.removeEventListener('keydown', unlockAudio);
     }
@@ -1327,12 +1328,14 @@
     document.addEventListener('keydown', unlockAudio);
 
     function updateThemeMusic(name) {
-      if (name === 'bun') {
-        bunAudio.play().catch(() => {});
-      } else {
-        bunAudio.pause();
-        bunAudio.currentTime = 0;
-      }
+      Object.entries(themeAudio).forEach(([theme, audio]) => {
+        if (theme === name) {
+          audio.play().catch(() => {});
+        } else {
+          audio.pause();
+          audio.currentTime = 0;
+        }
+      });
     }
 
     setupBunNoHover();
