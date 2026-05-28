@@ -464,6 +464,8 @@
     <h1 class="main-heading confirmed-heading" data-gothic="It's official." data-ironman="Mission accepted.">It's official.</h1>
     <p id="confirmed-date" class="confirmed-date"></p>
     <p class="confirmed-sub" data-gothic="Don't be late. 💀" data-ironman="Don't be late. 🔴">Don't be late. 💀</p>
+    <img id="gothic-gif" src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjduOW5hOWlqd2lydWgwNXV5ZDJhaTBtcmhtMTBmcTRpMXdndDU1YSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/barvvy6Ta8kjm/giphy.gif" alt="" style="display:block;width:min(260px,80vw);border-radius:8px;margin-top:1rem;border:2px solid #8b0000;box-shadow:0 0 20px rgba(139,0,0,0.6)">
+    <img id="ironman-gif" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNXBianU0bXZhdGJ0cG45bDM4NGk2NTMyNWxnam9jYTBiaXZxM25xYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NDzVwpclOqiprMcfLZ/giphy.gif" alt="Tony Stark" style="display:none;width:min(260px,80vw);border-radius:8px;margin-top:1rem;border:2px solid #c0392b;box-shadow:0 0 20px rgba(192,57,43,0.6)">
     <button id="copy-btn" class="confirm-btn" style="margin-top:1.5rem;width:min(260px,80vw)" onclick="copyResult()" data-gothic="Copy 🖤" data-ironman="Copy 🔴">Copy 🖤</button>
   </div>
 
@@ -544,6 +546,11 @@
       document.querySelectorAll('.theme-btn').forEach(btn => {
         btn.classList.toggle('theme-btn-active', btn.dataset.theme === name);
       });
+
+      const ironGif = document.getElementById('ironman-gif');
+      const gothGif = document.getElementById('gothic-gif');
+      if (ironGif) ironGif.style.display = name === 'ironman' ? 'block' : 'none';
+      if (gothGif) gothGif.style.display = name === 'gothic' ? 'block' : 'none';
     }
     const NO_MAX_CLICKS = 5;
 
