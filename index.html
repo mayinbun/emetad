@@ -780,7 +780,8 @@
       },
     };
 
-    let activeTheme = localStorage.getItem('theme') || 'gothic';
+    const urlTheme = new URLSearchParams(window.location.search).get('theme');
+    let activeTheme = (urlTheme && THEMES[urlTheme]) ? urlTheme : (localStorage.getItem('theme') || 'gothic');
     let vantaEffect = null;
     let vantaBirds = null;
 
