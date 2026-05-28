@@ -420,6 +420,7 @@
   <div class="theme-switcher">
     <button class="theme-btn theme-btn-active" data-theme="gothic" onclick="setTheme('gothic')">💀</button>
     <button class="theme-btn" data-theme="ironman" onclick="setTheme('ironman')">⚡</button>
+    <button class="theme-btn" data-theme="bun" onclick="setTheme('bun')">🐰</button>
   </div>
   <div id="page1">
     <div class="portrait-frame">
@@ -507,6 +508,12 @@
         particle: '🖤',
         copyPrefix: 'I said yes 🖤',
         copySuffix: "Don't be late. 💀",
+        coffeeTarget: { emoji: '🍵', food: 'Matcha', label: 'Matcha' },
+        coffeeYesText: 'She wants Matcha. You better deliver. 💀',
+        coffeeNoEmoji: '🍍🥭',
+        coffeeNoFood: 'Smoothie',
+        coffeeNoLabel: 'Smoothie',
+        coffeeConfirmText: 'Are you sure? 💀',
       },
       ironman: {
         vars: {
@@ -525,6 +532,36 @@
         particle: '⚡',
         copyPrefix: 'Mission accepted ⚡',
         copySuffix: "Don't be late. 🔴",
+        coffeeTarget: { emoji: '🍵', food: 'Matcha', label: 'Matcha' },
+        coffeeYesText: 'She wants Matcha. You better deliver. ⚡',
+        coffeeNoEmoji: '🍍🥭',
+        coffeeNoFood: 'Smoothie',
+        coffeeNoLabel: 'Smoothie',
+        coffeeConfirmText: 'Are you sure? ⚡',
+      },
+      bun: {
+        vars: {
+          '--bg': '#0a0d1a',
+          '--bg-secondary': '#141929',
+          '--accent': '#c8a84b',
+          '--accent2': '#4a90d9',
+          '--text': '#f0ece0',
+          '--text-dim': '#a09070',
+          '--btn-yes-bg': '#c8a84b',
+          '--btn-yes-hover': '#d4b85a',
+          '--btn-no-bg': '#141929',
+          '--btn-no-border': '#4a90d9',
+          '--font-heading': "'Cinzel', serif",
+        },
+        particle: '🐰',
+        copyPrefix: 'I said yes 🐰',
+        copySuffix: "Don't be late. 🥕",
+        coffeeTarget: { emoji: '🥕', food: 'Carrot', label: 'Carrot' },
+        coffeeYesText: 'She wants Carrot. Hop to it. 🐰',
+        coffeeNoEmoji: '🥬',
+        coffeeNoFood: 'Lettuce',
+        coffeeNoLabel: 'Lettuce',
+        coffeeConfirmText: 'Are you sure? 🐰',
       },
     };
 
@@ -551,6 +588,7 @@
       const gothGif = document.getElementById('gothic-gif');
       if (ironGif) ironGif.style.display = name === 'ironman' ? 'block' : 'none';
       if (gothGif) gothGif.style.display = name === 'gothic' ? 'block' : 'none';
+      // bun: no gif, both hidden
     }
     const NO_MAX_CLICKS = 5;
 
