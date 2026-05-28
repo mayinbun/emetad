@@ -35,14 +35,14 @@
       overflow: hidden;
     }
 
-    #page1, #page2, #page3 {
+    #page1, #page2, #page3, #page4 {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
       width: 100%;
-      padding: 2rem;
+      padding: 2rem 1.5rem;
       text-align: center;
       position: relative;
       z-index: 1;
@@ -383,9 +383,44 @@
       border-color: #666;
       color: #aaa;
     }
+
+    .theme-switcher {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      display: flex;
+      gap: 8px;
+      z-index: 100;
+    }
+
+    .theme-btn {
+      background: transparent;
+      border: 2px solid #444;
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      color: #888;
+      transition: border-color 0.2s, box-shadow 0.2s, color 0.2s;
+    }
+
+    .theme-btn:hover {
+      border-color: var(--accent);
+      color: var(--text);
+    }
+
+    .theme-btn-active {
+      border-color: var(--accent);
+      color: var(--text);
+      box-shadow: 0 0 10px var(--accent);
+    }
   </style>
 </head>
 <body>
+  <div class="theme-switcher">
+    <button class="theme-btn theme-btn-active" data-theme="gothic" onclick="setTheme('gothic')">💀</button>
+    <button class="theme-btn" data-theme="ironman" onclick="setTheme('ironman')">⚡</button>
+  </div>
   <div id="page1">
     <div class="portrait-frame">
       <img src="me.png" alt="" class="portrait-img">
@@ -429,7 +464,7 @@
     <h1 class="main-heading confirmed-heading" data-gothic="It's official." data-ironman="Mission accepted.">It's official.</h1>
     <p id="confirmed-date" class="confirmed-date"></p>
     <p class="confirmed-sub" data-gothic="Don't be late. 💀" data-ironman="Don't be late. 🔴">Don't be late. 💀</p>
-    <button id="copy-btn" class="confirm-btn" style="margin-top:1.5rem" onclick="copyResult()" data-gothic="Copy 🖤" data-ironman="Copy 🔴">Copy 🖤</button>
+    <button id="copy-btn" class="confirm-btn" style="margin-top:1.5rem;width:min(260px,80vw)" onclick="copyResult()" data-gothic="Copy 🖤" data-ironman="Copy 🔴">Copy 🖤</button>
   </div>
 
   <div id="page3">
@@ -688,7 +723,11 @@
         spawned++;
         if (spawned >= 15) clearInterval(interval);
       }, 300);
-      playFFVictory();
+      if (activeTheme === 'ironman') {
+        playArcReactor();
+      } else {
+        playFFVictory();
+      }
     }
 
     function playFFVictory() {
@@ -741,6 +780,57 @@
 
       // Final A minor resolution chord
       chord([110.00, 164.81, 220.00, 329.63, 440.00], 3.2, 1.4, 0.16);
+    }
+
+    function playArcReactor() {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+
+      // Rising hum — low sine sweeping up over 1.5s
+      const hum = ctx.createOscillator();
+      const humGain = ctx.createGain();
+      hum.type = 'sine';
+      hum.frequency.setValueAtTime(60, ctx.currentTime);
+      hum.frequency.linearRampToValueAtTime(220, ctx.currentTime + 1.5);
+      humGain.gain.setValueAtTime(0, ctx.currentTime);
+      humGain.gain.linearRampToValueAtTime(0.18, ctx.currentTime + 0.3);
+      humGain.gain.linearRampToValueAtTime(0.0, ctx.currentTime + 1.5);
+      hum.connect(humGain);
+      humGain.connect(ctx.destination);
+      hum.start(ctx.currentTime);
+      hum.stop(ctx.currentTime + 1.5);
+
+      // Electronic pulse clicks — rapid beeps building tension
+      [0.3, 0.55, 0.75, 0.9, 1.0, 1.08, 1.14].forEach((t, i) => {
+        const osc = ctx.createOscillator();
+        const g = ctx.createGain();
+        osc.type = 'square';
+        osc.frequency.value = 440 + i * 80;
+        g.gain.setValueAtTime(0.12, ctx.currentTime + t);
+        g.gain.linearRampToValueAtTime(0, ctx.currentTime + t + 0.07);
+        osc.connect(g);
+        g.connect(ctx.destination);
+        osc.start(ctx.currentTime + t);
+        osc.stop(ctx.currentTime + t + 0.1);
+      });
+
+      // Triumphant power chord at 1.6s — E major with metallic overtones
+      [[82.41, 123.47, 164.81, 246.94], // E2 B2 E3 B3
+       [329.63, 415.30, 493.88]          // E4 Ab4 B4
+      ].flat().forEach(freq => {
+        const osc = ctx.createOscillator();
+        const g = ctx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.value = freq;
+        const t = ctx.currentTime + 1.6;
+        g.gain.setValueAtTime(0, t);
+        g.gain.linearRampToValueAtTime(0.08, t + 0.04);
+        g.gain.setValueAtTime(0.08, t + 0.8);
+        g.gain.linearRampToValueAtTime(0, t + 1.4);
+        osc.connect(g);
+        g.connect(ctx.destination);
+        osc.start(t);
+        osc.stop(t + 1.5);
+      });
     }
 
     function handleNoClick() {
