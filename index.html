@@ -624,7 +624,7 @@
   </div>
   <div id="page1">
     <div class="portrait-frame">
-      <img src="me.png" alt="" class="portrait-img">
+      <img src="me.png" alt="" class="portrait-img" id="portrait-img">
     </div>
     <h1 class="main-heading" id="main-title">Will you date me? <span id="title-skull" data-gothic="💀" data-ironman="⚡" data-bun="🐰">💀</span></h1>
     <p class="subtext" data-gothic="Even death can't stop this feeling." data-ironman="I am Iron Man." data-bun="Hop to it.">Even death can't stop this feeling.</p>
@@ -859,6 +859,8 @@
       confirmBtns.forEach(b => b.classList.toggle('bun-btn-confirm', isBun));
 
       document.body.classList.toggle('bun-theme', name === 'bun');
+      const portrait = document.getElementById('portrait-img');
+      if (portrait) portrait.src = name === 'bun' ? 'me_blk.png' : 'me.png';
 
       const url = new URL(window.location);
       url.searchParams.set('theme', name);
