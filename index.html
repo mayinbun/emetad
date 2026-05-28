@@ -111,6 +111,15 @@
       100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
     }
 
+    @keyframes bunHop {
+      0%   { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+      20%  { transform: translate(8px, -18px) rotate(5deg); }
+      40%  { transform: translate(20px, 0px) rotate(-3deg); }
+      60%  { transform: translate(40px, -24px) rotate(8deg); }
+      80%  { transform: translate(70px, -6px) rotate(-4deg); }
+      100% { transform: translate(130vw, -20px) rotate(15deg); opacity: 0; }
+    }
+
     @keyframes fadeInScale {
       0%   { opacity: 0; transform: scale(0.5); }
       100% { opacity: 1; transform: scale(1); }
@@ -980,6 +989,23 @@
 
     function handleNoClick() {
       noClickCount++;
+
+      if (activeTheme === 'bun') {
+        const hopDist = noClickCount * 28;
+        const hopHeight = 14 + noClickCount * 6;
+        btnNo.style.transition = 'none';
+        btnNo.style.animation = `bunHop ${0.55 - noClickCount * 0.04}s ease forwards`;
+        if (noClickCount >= NO_MAX_CLICKS) {
+          setTimeout(() => btnNo.remove(), 600);
+        } else {
+          setTimeout(() => {
+            btnNo.style.animation = '';
+            btnNo.style.transform = `translateX(${hopDist}px)`;
+          }, 560);
+        }
+        return;
+      }
+
       const scale = Math.max(0, 1 - noClickCount * 0.18);
       btnNo.style.transform = `scale(${scale})`;
       btnNo.style.opacity = scale;
